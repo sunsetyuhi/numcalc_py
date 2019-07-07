@@ -68,7 +68,7 @@ def visualization(t_list, y_list):
 
 
 #メイン実行部
-if __name__ == '__main__':
+if (__name__ == '__main__'):
     #2次のRunge-Kutta法でdt離れた点の値を取得（導関数、tの初期値、yの初期値、刻み幅dt）
     t, y = runge_kutta2(func_dydt, 0.0, 0.0, 1e-1)
     print("t = {:.7f},  y = {:.7f}".format(t, y))
