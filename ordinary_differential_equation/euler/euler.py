@@ -8,8 +8,8 @@ def func_dydt(t, y):
     return t**2.0 -3.0  #dy/dt = t^2 -3.0
 
 
-#Euler法
-def euler(func_dydt, t, y, dt):
+#Euler法（導関数、tの初期値、yの初期値、刻み幅dt）
+def euler(func_dydt, t, y, dt=1e-3):
     dy = func_dydt(t, y)*dt  #変化量を計算
 
     t += dt  #変数を更新
@@ -18,8 +18,8 @@ def euler(func_dydt, t, y, dt):
     return t, y
 
 
-#常微分方程式を逐次計算
-def ode_calc(func_dydt, y_start, t_start, t_end, dt):
+#常微分方程式を逐次計算（導関数、yの初期値、tの開始点、tの終了点、刻み幅dt）
+def ode_calc(func_dydt, y_start, t_start, t_end, dt=1e-2):
     num_calc = 0  #計算回数
     t_div = np.abs((t_end-t_start)/dt)  #格子分割数
     if(t_end<t_start):  #負の方向に計算する時は刻み幅の符号を反転
@@ -67,12 +67,12 @@ def visualization(t_list, y_list):
 
 #メイン実行部
 if (__name__ == '__main__'):
-    #Euler法でdt離れた点の値を取得（導関数、tの初期値、yの初期値、刻み幅dt）
-    t, y = euler(func_dydt, 0.0, 0.0, 1e-1)
+    #Euler法でdt離れた点の値を取得
+    t, y = euler(func_dydt, 0.0, 0.0)
     print("t = {:.7f},  y = {:.7f}".format(t, y))
 
-    #常微分方程式を逐次計算（導関数、yの初期値、tの開始点、tの終了点、刻み幅dt）
-    t_list, y_list = ode_calc(func_dydt, 0.0, -5.0, 5.0, 1e-1)
+    #常微分方程式を逐次計算
+    t_list, y_list = ode_calc(func_dydt, 0.0, -5.0, 5.0)
 
     #結果を可視化
     visualization(t_list, y_list)
