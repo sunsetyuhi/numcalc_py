@@ -8,11 +8,16 @@ def func_f(x):
     return x**2.0 -2.0
 
 
-#二分法で解を求める
-def bisection(func_f, x_min, x_max, error):
+#二分法（方程式の関数項、探索区間の左端、探索区間の右端、誤差範囲、最大反復回数）
+def bisection(func_f, x_min, x_max, error=1e-10, max_loop=100):
     #初期値を表示
     num_calc = 0  #計算回数
     print("{:3d}:  {:.15f} <= x <= {:.15f}".format(num_calc, x_min, x_max))
+
+    #中間値の定理の条件を満たすか調べる
+    if(0.0 < func_f(x_min)*func_f(x_max)):
+        print("error: Section definition is invalid (0.0 < func_f(x_min)*func_f(x_max)).")
+        quit()
 
     #ずっと繰り返す
     while(True):
@@ -30,7 +35,7 @@ def bisection(func_f, x_min, x_max, error):
         print("{:3d}:  {:.15f} <= x <= {:.15f}".format(num_calc, x_min, x_max))
 
         #「誤差範囲が一定値以下」または「計算回数が一定値以上」ならば終了
-        if((x_max-x_min <= error) or 100<=num_calc):
+        if((x_max-x_min <= error) or max_loop <= num_calc):
             break
 
     #最終的に得られた解
@@ -39,7 +44,7 @@ def bisection(func_f, x_min, x_max, error):
     return x_mid
 
 
-#可視化
+#可視化（方程式の関数項、グラフ左端、グラフ右端、方程式の解）
 def visualization(func_f, x_min, x_max, x_solved):
     plt.xlabel("$x$")  #x軸の名前
     plt.ylabel("$f(x)$")  #y軸の名前
@@ -58,8 +63,8 @@ def visualization(func_f, x_min, x_max, x_solved):
 
 #メイン実行部
 if (__name__ == '__main__'):
-    #非線型方程式の解を計算（方程式の関数項、探索区間の左端、探索区間の右端、誤差範囲）
-    solution = bisection(func_f, -2.0, -1.0, 1e-10)
+    #二分法で非線型方程式の解を計算
+    solution = bisection(func_f, -2.0, -1.0)
 
-    #結果を可視化（方程式の関数項、グラフ左端、グラフ右端、方程式の解）
+    #結果を可視化
     visualization(func_f, solution-1.0, solution+1.0, solution)
