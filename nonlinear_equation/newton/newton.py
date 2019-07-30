@@ -8,10 +8,9 @@ def func_f(x):
     return x**2.0 -2.0
 
 
-#Newton法で解を求める
-def newton(func_f, x0, error):
+#Newton法（方程式の関数項、探索の開始点、誤差範囲、微小量、最大反復回数）
+def newton(func_f, x0, error=1e-10, limit=1e-10, max_loop=100):
     num_calc = 0  #計算回数
-    limit = 1e-10  #微小量
     print("{:3d}:  x = {:.15f}".format(num_calc, x0))
 
     #ずっと繰り返す
@@ -29,7 +28,7 @@ def newton(func_f, x0, error):
         print("{:3d}:  x = {:.15f}".format(num_calc, x0))
 
         #「誤差範囲が一定値以下」または「計算回数が一定値以上」ならば終了
-        if((abs(x1-x0) <= error) or 100<=num_calc):
+        if((abs(x1-x0) <= error) or max_loop <= num_calc):
             break
 
         #解を更新
@@ -41,7 +40,7 @@ def newton(func_f, x0, error):
     return x0
 
 
-#可視化
+#可視化（方程式の関数項、グラフ左端、グラフ右端、方程式の解）
 def visualization(func_f, x_min, x_max, x_solved):
     plt.xlabel("$x$")  #x軸の名前
     plt.ylabel("$f(x)$")  #y軸の名前
@@ -60,8 +59,8 @@ def visualization(func_f, x_min, x_max, x_solved):
 
 #メイン実行部
 if (__name__ == '__main__'):
-    #非線型方程式の解を計算（方程式の関数項、探索の開始点、誤差範囲）
-    solution = newton(func_f, -2.0, 1e-10)
+    #Newton法で非線型方程式の解を計算
+    solution = newton(func_f, -2.0)
 
-    #結果を可視化（方程式の関数項、グラフ左端、グラフ右端、方程式の解）
+    #結果を可視化
     visualization(func_f, solution-1.0, solution+1.0, solution)
