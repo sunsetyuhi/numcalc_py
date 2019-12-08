@@ -39,7 +39,7 @@ def gauss_jordan(mat_A, vec_b, process=False, eps=1e-10):
 
         #pivotが小さかったら（係数行列が非正則だったら）例外を発生させる
         if(abs(val_max) < eps):
-            print("error: pivot (=", val_max, ") is too small (<= ", eps, ").")
+            print("error: pivot (=", val_max, ") is too small (<=", eps, ").")
             if(abs(mat_Ab[pivot,num_vec_x]) < eps):
                 raise Exception("連立方程式は不定です。")
             else:
