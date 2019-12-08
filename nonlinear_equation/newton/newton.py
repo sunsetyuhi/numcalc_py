@@ -8,17 +8,17 @@ def func_f(x):
     return x**2.0 -2.0
 
 
-#Newton法（方程式の関数項、探索の開始点、誤差範囲、微小量、最大反復回数）
-def newton(func_f, x0, error=1e-10, limit=1e-10, max_loop=100):
+#Newton法（方程式の関数項、探索の開始点、微小量、誤差範囲、最大反復回数）
+def newton(func_f, x0, eps=1e-10, error=1e-10, max_loop=100):
     num_calc = 0  #計算回数
     print("{:3d}:  x = {:.15f}".format(num_calc, x0))
 
     #ずっと繰り返す
     while(True):
         #中心差分による微分値
-        func_df = (func_f(x0 +limit) -func_f(x0 -limit))/(2*limit)
-        if(abs(func_df) <= limit):  #傾きが0に近ければ止める
-            print("error: abs(func_df) is too small (<= 1e-10).")
+        func_df = (func_f(x0 +eps) -func_f(x0 -eps))/(2*eps)
+        if(abs(func_df) <= eps):  #傾きが0に近ければ止める
+            print("error: abs(func_df) is too small (<= ", eps, ").")
             quit()
 
         #次の解を計算
