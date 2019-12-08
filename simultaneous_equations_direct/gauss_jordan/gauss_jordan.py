@@ -16,7 +16,7 @@ vec_b = np.array(
 
 #Gauss-Jordan法（係数行列、係数ベクトル、途中計算表示、微小量）
 @numba.jit  #JITで最適化
-def gauss_jordan(mat_A, vec_b, process=False, epsilon=1e-10):
+def gauss_jordan(mat_A, vec_b, process=False, eps=1e-10):
     #拡大係数行列を用意
     vec_b = np.reshape(vec_b, (-1,1))  #列ベクトルに変換
     mat_Ab = np.concatenate((mat_A, vec_b), axis=1)  #横方向に結合
@@ -38,9 +38,9 @@ def gauss_jordan(mat_A, vec_b, process=False, epsilon=1e-10):
                 val_max = abs(mat_Ab[row,pivot])
 
         #pivotが小さかったら（係数行列が非正則だったら）例外を発生させる
-        if(abs(val_max) < epsilon):
-            print("error: pivot (=", val_max, ") is too small (<= ", epsilon, ").")
-            if(abs(mat_Ab[pivot,num_vec_x]) < epsilon):
+        if(abs(val_max) < eps):
+            print("error: pivot (=", val_max, ") is too small (<= ", eps, ").")
+            if(abs(mat_Ab[pivot,num_vec_x]) < eps):
                 raise Exception("連立方程式は不定です。")
             else:
                 raise Excaption("連立方程式は不能（解なし）です。")
