@@ -52,7 +52,7 @@ def gauss_jordan(mat_A, vec_b, process=False, eps=1e-10):
         if (pivot != row_max):
             mat_Ab[pivot,:], mat_Ab[row_max,:] = mat_Ab[row_max,:], mat_Ab[pivot,:].copy()
 
-        #pivot行をpivotで割る(mat_A[pivot,pivot]=1にする)
+        #pivot行をpivotで割る(mat_Ab[pivot,pivot]=1にする)
         mat_Ab[pivot, :] = mat_Ab[pivot, :]/val_max
 
         #掃き出し操作で、mat_Ab[pivot,pivot]より下の係数を0にする
