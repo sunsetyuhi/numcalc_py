@@ -18,7 +18,7 @@ def newton(func_f, x0, eps=1e-10, error=1e-10, max_loop=100):
         #中心差分による微分値
         func_df = (func_f(x0 +eps) -func_f(x0 -eps))/(2*eps)
         if(abs(func_df) <= eps):  #傾きが0に近ければ止める
-            print("error: abs(func_df) is too small (<= ", eps, ").")
+            print("error: abs(func_df) is too small (<=", eps, ").")
             quit()
 
         #次の解を計算
@@ -28,7 +28,7 @@ def newton(func_f, x0, eps=1e-10, error=1e-10, max_loop=100):
         print("{:3d}:  x = {:.15f}".format(num_calc, x0))
 
         #「誤差範囲が一定値以下」または「計算回数が一定値以上」ならば終了
-        if((abs(x1-x0) <= error) or max_loop <= num_calc):
+        if(abs(x1-x0)<=error or max_loop<=num_calc):
             break
 
         #解を更新
